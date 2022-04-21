@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TweetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-})->middleware(['auth'])->name('home');
+Route::get('/home', [TweetController::class, 'index'])->middleware(['auth'])->name('home');
+Route::post('/tweets', [TweetController::class, 'store'])->middleware(['auth'])->name('tweets.store');
 
 require __DIR__.'/auth.php';

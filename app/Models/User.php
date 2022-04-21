@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -41,4 +43,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    function getAvatarAttribute()
+    {
+        return "https://i.pravatar.cc/40?u=" . $this->email;
+    }
+
+    public function tweets(): HasMany
+    {
+        return $this->hasMany(Tweet::class);
+    }
+
+    public function timeline(): Collection
+    {
+        return Tweet::where('user_id', $this->id)->latest()->get();
+    }
 }
