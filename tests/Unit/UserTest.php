@@ -32,4 +32,29 @@ class UserTest extends TestCase
         
         $this->assertCount(2, $user->timeline());
     }
+
+    /**
+     * @test
+     */
+    public function aUserCanFollowOtherUsers()
+    {
+        $user = User::factory()
+                    ->create();
+
+        $userAToFollow = User::factory()
+                            ->has(Tweet::factory(2))
+                            ->create();
+
+        $user->follow($userAToFollow);
+        
+        $this->assertCount(1, $user->follows);
+
+        $userBToFollow = User::factory()
+                            ->has(Tweet::factory(2))
+                            ->create();
+
+        $user->follow($userBToFollow);
+
+        $this->assertCount(2, $user->fresh()->follows);
+    }
 }

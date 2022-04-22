@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -58,4 +60,14 @@ class User extends Authenticatable
     {
         return Tweet::where('user_id', $this->id)->latest()->get();
     }
+
+    function follow(User $userToFollow)
+    {
+        return $this->follows()->attach($userToFollow);
+    }
+
+    public function follows(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id');
+    }   
 }
