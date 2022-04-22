@@ -13,15 +13,13 @@ class TweetsTest extends TestCase
     use RefreshDatabase;
 
     /**
-     * A basic feature test example.
-     *
-     * @return void
+     * @test
      */
-    public function test_example()
+    public function guestsAreRedirectedToLoginPageWhenVisitingHomePage()
     {
-        $response = $this->get('/');
+        $response = $this->get(route('home'));
 
-        $response->assertStatus(200);
+        $response->assertRedirect(route('login'));
     }
 
     /**

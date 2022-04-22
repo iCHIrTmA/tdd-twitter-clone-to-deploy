@@ -18,7 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', [TweetController::class, 'index'])->middleware(['auth'])->name('home');
-Route::post('/tweets', [TweetController::class, 'store'])->middleware(['auth'])->name('tweets.store');
+Route::middleware('auth')->group(function () {
+    Route::get('/tweets', [TweetController::class, 'index'])->name('home');
+    Route::post('/tweets', [TweetController::class, 'store'])->name('tweets.store');
+});
 
 require __DIR__.'/auth.php';

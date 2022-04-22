@@ -24,13 +24,28 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function aUserTimelineShowsUserTweets()
+    public function aUserTimelineReturnsUserTweets()
     {
         $user = User::factory()
                     ->has(Tweet::factory(2))
                     ->create();
         
         $this->assertCount(2, $user->timeline());
+    }
+
+    /**
+     * @test
+     */
+    public function aUserTimelineReturnsTweetsOfFollowedUsers()
+    {
+        $user = User::factory()->create();
+        $userToFollow = User::factory()
+                            ->has(Tweet::factory(5))
+                            ->create();
+
+        $user->follow($userToFollow);
+        
+        $this->assertCount(5, $user->timeline());
     }
 
     /**
@@ -56,5 +71,17 @@ class UserTest extends TestCase
         $user->follow($userBToFollow);
 
         $this->assertCount(2, $user->fresh()->follows);
+    }
+
+    /**
+     * @test
+     */
+    public function aUserHasManyTweets()
+    {
+        $user = User::factory()
+                    ->has(Tweet::factory(2))
+                    ->create();
+        
+        $this->assertCount(2, $user->tweets);
     }
 }
