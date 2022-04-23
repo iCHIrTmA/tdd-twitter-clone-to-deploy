@@ -1,18 +1,16 @@
-@extends('layouts.app')
-
-@section('content')
-<header class="mb-6 relative">
+<x-app>
+    <header class="mb-6 relative">
         <div class="relative">
             <img src="{{ asset('images/default-profile-banner.jpg') }}" 
-                  alt=""
-                  class="mb-2"
+                    alt=""
+                    class="mb-2"
             >
 
             <img src="{{ $user->avatar }}"
-                 alt=""
-                 class="rounded-full mr-2 absolute bottom-0 transform -translate-x-1/2 translate-y-1/2"
-                 style="left: 50%"
-                 width="150"
+                    alt=""
+                    class="rounded-full mr-2 absolute bottom-0 transform -translate-x-1/2 translate-y-1/2"
+                    style="left: 50%"
+                    width="150"
             >
         </div>
 
@@ -42,12 +40,10 @@
             He is also characterized by a Brooklyn accent, his portrayal as a trickster,
             and his catch phrase "Eh...What's up, doc?"
         </p>
-
-
     </header>
     
     @include('_timeline', [
         'tweets' => $user->tweets
     ])
-@endsection
+</x-app>
 
