@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/profiles/{user:name}', [ProfileController::class, 'show'])->name('profiles.show');
+Route::get('/profiles/{user:name}/edit', [ProfileController::class, 'edit'])->middleware('can:edit,user')->name('profiles.edit');
 
 
 require __DIR__.'/auth.php';

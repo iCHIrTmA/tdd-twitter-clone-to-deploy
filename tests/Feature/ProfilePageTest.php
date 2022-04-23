@@ -33,4 +33,54 @@ class ProfilePageTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    /**
+     * @test
+     */
+    public function aUserCanSeeEditButtonOnHisOwnProfile()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('profiles.show', $user));
+
+        $response->assertSee('Edit Profile');
+    }
+
+    /**
+     * @test
+     */
+    public function aUserCannotSeeEditButtonOnOtherUserProfile()
+    {
+        $user = User::factory()->create();
+        $anotherUser = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('profiles.show', $anotherUser));
+
+        $response->assertDontSee('Edit Profile');
+    }
+
+    /**
+     * @test
+     */
+    public function aUserCanAccessEditPageOfHisOwnProfile()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('profiles.edit', $user));
+
+        $response->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function aUserCannotAccessEditPageOfOtherUserProfile()
+    {
+        $user = User::factory()->create();
+        $otherUser = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('profiles.edit', $otherUser));
+
+        $response->assertStatus(403);
+    }
 }
