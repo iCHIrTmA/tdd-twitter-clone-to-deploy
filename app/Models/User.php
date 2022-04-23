@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Followable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,7 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Followable;
 
     /**
      * The attributes that are mass assignable.
@@ -53,7 +54,7 @@ class User extends Authenticatable
 
     public function tweets(): HasMany
     {
-        return $this->hasMany(Tweet::class);
+        return $this->hasMany(Tweet::class)->latest();
     }
 
     public function timeline(): Collection
@@ -64,15 +65,5 @@ class User extends Authenticatable
                     ->orWhere('user_id', $this->id)
                     ->latest()
                     ->get();
-    }
-
-    public function follow(User $userToFollow)
-    {
-        return $this->follows()->attach($userToFollow);
-    }
-
-    public function follows(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id');
     }
 }
