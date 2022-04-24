@@ -14,6 +14,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
+use Tests\Feature\LikeAndDislikeTweetFeatureTest;
 
 class User extends Authenticatable
 {
@@ -75,5 +76,20 @@ class User extends Authenticatable
                     ->orWhere('user_id', $this->id)
                     ->latest()
                     ->get();
+    }
+
+    public function likedTweets(): HasMany
+    {
+        return $this->hasMany(Like::class)->latest();
+    }
+
+    public function like($tweet)
+    {
+        $this->likedTweets()->create(['tweet_id' => $tweet->id]);
+    }
+
+    public function unlike($tweet)
+    {
+        $this->likedTweets()->where('tweet_id', $tweet->id)->delete();
     }
 }
