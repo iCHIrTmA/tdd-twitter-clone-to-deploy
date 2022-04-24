@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TweetController;
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profiles/{user:username}', [ProfileController::class, 'update'])->name('profiles.update');
 });
 
+Route::get('/explore', ExploreController::class)->name('explore.index');
 Route::get('/profiles/{user:username}', [ProfileController::class, 'show'])->name('profiles.show');
 Route::get('/profiles/{user:username}/edit', [ProfileController::class, 'edit'])->middleware('can:edit,user')->name('profiles.edit');
 
