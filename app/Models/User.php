@@ -57,6 +57,11 @@ class User extends Authenticatable
         // return "https://i.pravatar.cc/200?u=" . $this->email;
     }
 
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::make($password);
+    }
+
     public function tweets(): HasMany
     {
         return $this->hasMany(Tweet::class)->latest();

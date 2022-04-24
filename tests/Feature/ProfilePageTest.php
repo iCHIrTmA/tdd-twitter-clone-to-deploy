@@ -87,7 +87,7 @@ class ProfilePageTest extends TestCase
     /**
      * @test
      */
-    public function aUserCannotEditHisOwnProfile()
+    public function aUserCanEditHisOwnProfile()
     {
         $user = User::factory()->create();
         $newDetails = ['username' => 'new_user_name', 'name' => 'New Name', 'email' => 'new_email@example.net'];

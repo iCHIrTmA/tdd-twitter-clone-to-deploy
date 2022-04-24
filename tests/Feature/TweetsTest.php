@@ -15,16 +15,6 @@ class TweetsTest extends TestCase
     /**
      * @test
      */
-    public function guestsAreRedirectedToLoginPageWhenVisitingHomePage()
-    {
-        $response = $this->get(route('home'));
-
-        $response->assertRedirect(route('login'));
-    }
-
-    /**
-     * @test
-     */
     public function userTweetsAreDisplayedInHomePage()
     {
         $user = User::factory()->create();

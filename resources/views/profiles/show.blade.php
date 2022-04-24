@@ -27,7 +27,6 @@
                         Edit Profile
                     </a>
                 @endcan
-
                 <x-follow-button :user="$user"></x-follow-button>
             </div>
         </div>
@@ -41,7 +40,7 @@
     </header>
     
     @include('_timeline', [
-        'tweets' => $user->tweets
+        'tweets' => $tweets
     ])
 </x-app>
 

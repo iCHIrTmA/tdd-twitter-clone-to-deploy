@@ -13,7 +13,8 @@ class ProfileController extends Controller
     public function show(User $user)
     {
         return view('profiles.show', [
-            'user' => $user
+            'user' => $user,
+            'tweets' => $user->tweets,
         ]);
     }
 
@@ -41,7 +42,7 @@ class ProfileController extends Controller
 
         if($request->has('password')) {
             $user->update([
-                'password' => Hash::make($request->password),
+                'password' => $request->password,
             ]);
         }
 
@@ -53,7 +54,8 @@ class ProfileController extends Controller
 
 
         return view('profiles.show', [
-            'user' => $user
+            'user' => $user,
+            'tweets' => $user->tweets,
         ]);
     }
 }
