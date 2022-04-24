@@ -1,5 +1,5 @@
 <x-app>
-    <form method="POST" action="{{ route('profiles.show', $user) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('profiles.update', $user) }}" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
 
@@ -14,7 +14,7 @@
                    type="text"
                    name="name"
                    id="name"
-                   value="{{ $user->name }}"
+                   value="{{ old('name', $user->name) }}"
                    required
             >
 
@@ -34,7 +34,7 @@
                    type="text"
                    name="username"
                    id="username"
-                   value="{{ $user->username }}"
+                   value="{{ old('username', $user->username) }}"
                    required
             >
 

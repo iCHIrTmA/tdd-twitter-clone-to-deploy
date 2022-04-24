@@ -83,4 +83,19 @@ class ProfilePageTest extends TestCase
 
         $response->assertStatus(403);
     }
+
+    /**
+     * @test
+     */
+    public function aUserCannotEditHisOwnProfile()
+    {
+        $user = User::factory()->create();
+        $newDetails = ['username' => 'new_user_name', 'name' => 'New Name', 'email' => 'new_email@example.net'];
+
+        $response = $this->actingAs($user)->patch(route('profiles.update', $user), $newDetails);
+
+        $response->assertStatus(200);
+        $this->assertSame($user->fresh()->username, $newDetails['username']);
+        $this->assertSame($user->fresh()->name, $newDetails['name']);
+    }
 }

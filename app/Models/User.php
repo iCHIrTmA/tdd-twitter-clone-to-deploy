@@ -23,7 +23,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'username',
         'name',
+        'avatar',
         'email',
         'password',
     ];
@@ -47,9 +49,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getAvatarAttribute()
+    public function getAvatarAttribute($value)
     {
-        return "https://i.pravatar.cc/200?u=" . $this->email;
+        return $value ? asset('storage/'. $value) : "https://i.pravatar.cc/200?u=" . $this->email;
+        // return "https://i.pravatar.cc/200?u=" . $this->email;
     }
 
     public function tweets(): HasMany
