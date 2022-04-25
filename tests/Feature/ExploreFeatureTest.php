@@ -22,7 +22,7 @@ class ExploreFeatureTest extends TestCase
         $this->actingAs($user)
             ->get(route('explore.index'))
             ->assertStatus(200)
-            ->assertSee("Hi $user->username, Explore the Tweety World!")
+            ->assertSee("Hi $user->username")
             ->assertSee($another_user->username);
     }
 }

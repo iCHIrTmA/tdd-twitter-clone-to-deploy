@@ -1,5 +1,9 @@
-<x-app> 
-    <h3 class="font-weight-bold mb-3">Hi {{ auth()->user()->username }}, Explore the Tweety World!</h3>
+<x-app>
+    @auth
+        <h3 class="font-weight-bold mb-3">Hi {{ auth()->user()->username }}, explore their tweets!</h3>
+    @else
+        <h3 class="font-weight-bold mb-3">Hi! Please <a href="{{ route('login') }}" class="text-blue-500">sign in</a> to follow tweets from these awesome people</h3>
+    @endauth
     <div>
         @foreach ($users as $user)
             <a href="{{ route('profiles.show', $user) }}" class="flex items-center mb-5">

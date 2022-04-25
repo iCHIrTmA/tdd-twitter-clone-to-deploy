@@ -4,7 +4,7 @@
         <textarea 
         name="body"
         class="w-full" 
-        placeholder="Sign in to publish a tweet"
+        placeholder="Pleas sign in to publish a tweet"
         required 
         autofocus 
         ></textarea>

@@ -9,8 +9,14 @@ class TweetController extends Controller
 {
     public function index()
     {
+        if (auth()->check()) {
+            $tweets = auth()->user()->timeline();
+        } else {
+            $tweets = Tweet::all();
+        }
+
         return view('tweets.index', [
-            'tweets' => Tweet::all(),
+            'tweets' => $tweets,
         ]);
     }
 
