@@ -22,7 +22,7 @@
                     <li>No friends yet</li>
                 @endforelse
             @else
-                Sign in to see follow list
+                <a href="{{ route('login') }}" class="text-pink-500">Sign in</a> to see people you follow
             @endauth
         </ul>
 </div>

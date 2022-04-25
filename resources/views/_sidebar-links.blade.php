@@ -35,13 +35,13 @@
                 Profile
             </a>
         </li>
+        <li>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="font-bold text-lg mb-4 block">
+                    Logout
+                </button>
+            </form>
+        </li>
     @endauth
-    <li>
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="font-bold text-lg mb-4 block">
-                Logout
-            </button>
-        </form>
-    </li>
 </ul>
