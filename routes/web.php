@@ -19,9 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [TweetController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::post('/tweets', [TweetController::class, 'store'])->name('tweets.store');
