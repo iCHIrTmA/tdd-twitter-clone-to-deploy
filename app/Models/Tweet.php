@@ -29,4 +29,16 @@ class Tweet extends Model
             ->where('user_id', auth()->user()->id, )
             ->exists();
     }
+
+    public function dislikes(): HasMany
+    {
+        return $this->hasMany(Dislike::class, 'tweet_id');
+    }
+
+    public function isDisliked(): bool
+    {
+        return $this->dislikes()
+            ->where('user_id', auth()->user()->id, )
+            ->exists();
+    }
 }

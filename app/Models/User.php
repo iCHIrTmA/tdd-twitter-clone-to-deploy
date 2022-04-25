@@ -92,4 +92,19 @@ class User extends Authenticatable
     {
         $this->likedTweets()->where('tweet_id', $tweet->id)->delete();
     }
+
+    public function dislikedTweets(): HasMany
+    {
+        return $this->hasMany(Dislike::class)->latest();
+    }
+
+    public function dislike($tweet)
+    {
+        $this->dislikedTweets()->create(['tweet_id' => $tweet->id]);
+    }
+
+    public function undislike($tweet)
+    {
+        $this->dislikedTweets()->where('tweet_id', $tweet->id)->delete();
+    }
 }

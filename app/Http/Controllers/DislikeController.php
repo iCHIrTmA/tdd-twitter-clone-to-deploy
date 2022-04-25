@@ -5,22 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Tweet;
 use Illuminate\Http\Request;
 
-class LikeController extends Controller
+class DislikeController extends Controller
 {
     public function store(Tweet $tweet)
     {
-        if ($tweet->isDisliked()) {
-            auth()->user()->undislike($tweet);
+        if ($tweet->isLiked()) {
+            auth()->user()->unlike($tweet);
         }
 
-        auth()->user()->like($tweet);
+        auth()->user()->dislike($tweet);
 
         return back();
     }   
 
     public function destroy(Tweet $tweet)
     {
-        auth()->user()->unlike($tweet);
+        auth()->user()->undislike($tweet);
 
         return back();
     }

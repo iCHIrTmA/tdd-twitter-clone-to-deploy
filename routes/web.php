@@ -3,6 +3,7 @@
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\DislikeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TweetController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/tweets', [TweetController::class, 'store'])->name('tweets.store');
     Route::post('/like/{tweet}', [LikeController::class, 'store'])->name('likes.store');
     Route::delete('/unlike/{tweet}', [LikeController::class, 'destroy'])->name('likes.destroy');
+    Route::post('/dislike/{tweet}', [DislikeController::class, 'store'])->name('dislikes.store');
+    Route::delete('/undislike/{tweet}', [DislikeController::class, 'destroy'])->name('dislikes.destroy');
     Route::post('/follow/{user:username}', [FollowController::class, 'store'])->name('follows.store');
     Route::patch('/profiles/{user:username}', [ProfileController::class, 'update'])->name('profiles.update');
 });
