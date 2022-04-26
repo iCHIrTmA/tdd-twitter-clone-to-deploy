@@ -6,19 +6,21 @@
     @endauth
     <div>
         @foreach ($users as $user)
-            <a href="{{ route('profiles.show', $user) }}" class="flex items-center mb-5">
-                <img src="{{ $user->avatar }}"
-                      alt="{{ $user->username }}'s avatar"
-                      width="60"
-                      class="mr-4 rounded-full"
-                >
-
-                <div>
-                    <h4 class="font-bold">{{ '@' . $user->username }}</h4>
-                </div>
-            </a>
+            <div class="flex justify-between items-center mb-6 lg:w-1/2">
+                <a href="{{ route('profiles.show', $user) }}" class="flex items-center">
+                    <img src="{{ $user->avatar }}"
+                            alt="{{ $user->username }}'s avatar"
+                            width="60"
+                            class="mr-4 rounded-full"
+                    >
+                    <div>
+                        <h4 class="font-bold">{{ '@' . $user->username }}</h4>
+                    </div>
+                </a>
+                <x-follow-button :user="$user"></x-follow-button>
+            </div>
         @endforeach
+    </div>
 
         {{ $users->links() }}
-    </div>
 </x-app>

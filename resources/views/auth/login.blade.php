@@ -48,7 +48,7 @@
                 @endif
 
                 <button
-                    class="ml-3 inline-flex items-center px-4 py-2 bg-pink-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-pink-700 active:bg-pink-900 focus:outline-none focus:border-pink-900 focus:ring ring-pink-300 disabled:opacity-25 transition ease-in-out duration-150"
+                    class="ml-3 inline-flex items-center px-4 py-2 bg-fuchsia-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-fuchsia-700 active:bg-fuchsia-900 focus:outline-none focus:border-fuchsia-900 focus:ring ring-fuchsia-300 disabled:opacity-25 transition ease-in-out duration-150"
                     onclick="$('#email').val('test_user@example.net');
                             $('#password').val('password')">
                     Quick Login
