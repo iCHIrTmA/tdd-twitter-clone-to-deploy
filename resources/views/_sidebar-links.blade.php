@@ -4,6 +4,13 @@
             Home
         </a>
     </li>
+    @guest
+        <li>
+            <a href="{{ route('register') }}" class="font-bold text-lg mb-4 block">
+                Register
+            </a>
+        </li>
+    @endguest
     <li>
         <a href="/explore" class="font-bold text-lg mb-4 block">
             Explore
